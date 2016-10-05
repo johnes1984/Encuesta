@@ -1,7 +1,10 @@
 var express = require('express');
 var mysql = require('mysql');
- 
 var app = express();
+var bodyParser     =        require("body-parser");
+//Here we are configuring express to use body-parser as middle-ware.
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
  
 
 var client = mysql.createConnection({
@@ -42,6 +45,16 @@ app.get('/',function(req,resp) {
         resp.json(rows);
     });
 });
+
+app.post('/userlogin', function(sReq, sRes){    
+    var email = sReq.body.email;
+    console.log(email)
+ sRes.end("yes");
+  
+});
+
+
+
 
 
 
